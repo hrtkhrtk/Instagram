@@ -8,6 +8,7 @@
 
 import UIKit
 import ESTabBarController
+import Firebase
 
 class ViewController: UIViewController {
 
@@ -18,6 +19,17 @@ class ViewController: UIViewController {
         setupTab()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // currentUserがnilならログインしていない
+        if Auth.auth().currentUser == nil {
+            // ログインしていないときの処理
+            let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Login")
+            self.present(loginViewController!, animated: true, completion: nil)
+        }
+    }
+    
     func setupTab() {
         
         // 画像のファイル名を指定してESTabBarControllerを作成する
