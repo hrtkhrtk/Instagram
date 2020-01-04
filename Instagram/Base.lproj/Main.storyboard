@@ -31,7 +31,47 @@
                     <view key="view" contentMode="scaleToFill" id="yav-7o-CKc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVg-04-eOC">
+                                <rect key="frame" x="57" y="124" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="0At-Pz-ggJ"/>
+                                </constraints>
+                                <state key="normal" title="ライブラリ" backgroundImage="btn"/>
+                                <connections>
+                                    <action selector="handleLibraryButton:" destination="rRt-jd-n4T" eventType="touchUpInside" id="Qoo-qM-xfd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSP-en-sMC">
+                                <rect key="frame" x="57" y="174" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="8Z6-BK-OyP"/>
+                                </constraints>
+                                <state key="normal" title="カメラ" backgroundImage="btn"/>
+                                <connections>
+                                    <action selector="handleCameraButton:" destination="rRt-jd-n4T" eventType="touchUpInside" id="zyC-qw-Ltw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ivh-7b-Myi">
+                                <rect key="frame" x="57" y="224" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="p8g-5x-Fi6"/>
+                                </constraints>
+                                <state key="normal" title="キャンセル" backgroundImage="btn"/>
+                                <connections>
+                                    <action selector="handleCancelButton:" destination="rRt-jd-n4T" eventType="touchUpInside" id="ife-BX-25G"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CVg-04-eOC" firstAttribute="centerX" secondItem="yav-7o-CKc" secondAttribute="centerX" id="FUc-ys-neH"/>
+                            <constraint firstItem="CVg-04-eOC" firstAttribute="top" secondItem="fF3-3w-CcH" secondAttribute="top" constant="80" id="NSW-ES-kfW"/>
+                            <constraint firstItem="Ivh-7b-Myi" firstAttribute="top" secondItem="eSP-en-sMC" secondAttribute="bottom" constant="10" id="WRA-W3-Vgl"/>
+                            <constraint firstItem="eSP-en-sMC" firstAttribute="top" secondItem="CVg-04-eOC" secondAttribute="bottom" constant="10" id="bVJ-wR-2RI"/>
+                            <constraint firstItem="eSP-en-sMC" firstAttribute="centerX" secondItem="yav-7o-CKc" secondAttribute="centerX" id="yWW-HU-RWF"/>
+                            <constraint firstItem="Ivh-7b-Myi" firstAttribute="centerX" secondItem="yav-7o-CKc" secondAttribute="centerX" id="z5J-xW-GOn"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="fF3-3w-CcH"/>
                     </view>
                 </viewController>
