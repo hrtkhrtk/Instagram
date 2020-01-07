@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -118,6 +119,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // セル内のボタンのアクションをソースコードで設定する
         cell.likeButton.addTarget(self, action:#selector(handleButton(_:forEvent:)), for: .touchUpInside)
         
+        cell.postButton.addTarget(self, action:#selector(handlePostButton(_:forEvent:)), for: .touchUpInside)
+        
+        //cell.tableView.reloadData()
+        
         return cell
     }
     
@@ -154,6 +159,45 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let postRef = Database.database().reference().child(Const.PostPath).child(postData.id!)
             let likes = ["likes": postData.likes]
             postRef.updateChildValues(likes)
+        }
+    }
+    
+    @objc func handlePostButton(_ sender: UIButton, forEvent event: UIEvent) {
+        print("DEBUG_PRINT: postボタンがタップされました。")
+        
+        // タップされたセルのインデックスを求める
+        let touch = event.allTouches?.first
+        let point = touch!.location(in: self.tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
+        
+        // 配列からタップされたインデックスのデータを取り出す
+        let postData = postArray[indexPath!.row]
+        
+        // Firebaseに保存するデータの準備
+        if Auth.auth().currentUser != nil { // ログインしている
+            //let cell = tableView.dequeueReusableCell(for: indexPath!) as! PostTableViewCell
+            //let cell = tableView(tableView, cellForRowAt:indexPath!) as! PostTableViewCell
+            let cell = tableView.cellForRow(at: indexPath!) as! PostTableViewCell
+            
+            //let button = cell.postButton // OK
+            //let comment = cell.commentTextField // OK
+            //print("test0105n02" + cell.captionLabel.text!) // OK
+            print("test0105n03 " + cell.commentTextField.text!)
+            if let comment = cell.commentTextField.text {
+                if comment.isEmpty {
+                    print("DEBUG_PRINT: コメントが空文字です。")
+                    SVProgressHUD.showError(withStatus: "コメントを入力して下さい")
+                    return
+                }
+
+                let commentRef = Database.database().reference().child(Const.PostPath).child(postData.id!).child(Const.CommentPath)
+                let name = Auth.auth().currentUser?.displayName
+                let time = Date.timeIntervalSinceReferenceDate
+                let commentDic = ["name": name, "comment": comment, "time": String(time)]
+                commentRef.childByAutoId().setValue(commentDic)
+                
+                //cell.tableView.reloadData()
+            }
         }
     }
 }

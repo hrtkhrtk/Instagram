@@ -18,6 +18,7 @@ class PostData: NSObject {
     var date: Date?
     var likes: [String] = []
     var isLiked: Bool = false
+    var commentArray:[Comment] = []
     
     init(snapshot: DataSnapshot, myId: String) {
         self.id = snapshot.key
@@ -43,6 +44,24 @@ class PostData: NSObject {
                 self.isLiked = true
                 break
             }
+        }
+        
+        
+        //print("test0105n05")
+        //if let commentData = valueDictionary["comments"] as? [String: Any] {
+        if let commentData = valueDictionary[Const.CommentPath] as? [String: Any] {
+            //print("test0105n06")
+            for commentDataElement in commentData {
+                let commentValueDictionary = commentDataElement.value as! [String: Any]
+                let commentName = commentValueDictionary["name"] as! String
+                let commentBody = commentValueDictionary["comment"] as! String
+                let commentTime = commentValueDictionary["time"] as! String
+                let commentElement = Comment(id:commentDataElement.key, name:commentName, comment:commentBody, time:commentTime)
+                self.commentArray.insert(commentElement, at: 0)
+                //self.commentArray.sort(by: {Int($0.time!)! > Int($1.time!)!})
+                self.commentArray.sort(by: {Double($0.time!)! > Double($1.time!)!})
+            }
+            //print(self.commentArray)
         }
     }
 }

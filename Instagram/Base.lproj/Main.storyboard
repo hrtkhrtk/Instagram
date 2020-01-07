@@ -306,7 +306,7 @@
                         <viewLayoutGuide key="safeArea" id="1o6-qy-ILk"/>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="UIy-dB-xXE" id="QJ8-tq-Vl8"/>
+                        <outlet property="tableView" destination="UIy-dB-xXE" id="eZe-0u-bmU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLD-52-ORv" userLabel="First Responder" sceneMemberID="firstResponder"/>
